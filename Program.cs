@@ -44,8 +44,7 @@ namespace PowerCableNotifier {
         }
 
         private static void AboutClick(object sender, EventArgs e) {
-            // TODO: Fix
-            // System.Diagnostics.Process.Start("https://github.com/hangacs/VirtualDesktopSwitcher");
+            System.Diagnostics.Process.Start("https://github.com/hangacs/PowerCableNotifier");
         }
 
         private static void SettingsClick(object sender, EventArgs e) {
