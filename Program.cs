@@ -10,7 +10,10 @@ namespace PowerCableNotifier {
         [STAThread]
         static void Main() {
             // TODO: Add new icon
-            notifyIcon.Icon = System.Drawing.SystemIcons.WinLogo;
+            System.Drawing.Icon cableOffIcon = Properties.Resources.CableOff32x32;
+            System.Drawing.Icon cableOnIcon = Properties.Resources.CableOn32x32;
+
+            notifyIcon.Icon = cableOnIcon;
 
             notifyIcon.ContextMenuStrip = GetContext();
             notifyIcon.BalloonTipText = "Power cable is off!";
@@ -23,8 +26,14 @@ namespace PowerCableNotifier {
 
             timer.Elapsed += new ElapsedEventHandler((object sender, ElapsedEventArgs e) => {
                 if (SystemInformation.PowerStatus.PowerLineStatus != PowerLineStatus.Online) {
+                    if (notifyIcon.Icon != cableOffIcon) {
+                        notifyIcon.Icon = cableOffIcon;
+                    }
                     notifyIcon.ShowBalloonTip(10000);
-                    //MessageBox.Show("Power cable is off", "Power Cable Notifier", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                } else {
+                    if (notifyIcon.Icon != cableOnIcon) {
+                        notifyIcon.Icon = cableOnIcon;
+                    }
                 }
             });
 
